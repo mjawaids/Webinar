@@ -1,0 +1,8 @@
+body {
+	background-color: black;
+}
+
+.img-responsive {
+	min-height: 643px;
+	height: 643px;
+}
