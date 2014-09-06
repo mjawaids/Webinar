@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Hello, Admin!</a>
+          <a class="navbar-brand" href="#">Hello, {{adminName}}!</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -78,7 +78,7 @@
 
                 <!-- List group -->
                 <div class="list-group scroll-panel script-panel-height" ng-controller="ScriptController as script">
-                  <a href="#" class="list-group-item" ng-repeat="item in script.loadedScripts" focus="{{$first}}" ng-focus="script.selectedRow = $index" ng-blur="script.selectedRow=-1" ng-class="{ 'list-group-item-success':script.selectedRow === $index}" ng-keydown="script.move($event, $index)">{{item.text}}</a>
+                  <a href="#" class="list-group-item" ng-repeat="item in script.loadedScripts" focus="{{$first}}" ng-focus="script.selectedRow = $index" ng-blur="script.selectedRow=-1" ng-class="{ 'list-group-item-success':script.selectedRow === $index}" ng-keydown="script.move($event, $index)">{{item.text | replaceAdmin | replaceViewer}}</a>
                 </div>
                 <div class="panel-footer"><em>Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys to highlight the sentence to speak.</em></div>
               

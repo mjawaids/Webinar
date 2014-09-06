@@ -2,12 +2,43 @@
 
     var app = angular.module('WebinarAdmin', []);
 
+    // Initialize the admin name
+    app.run(function ($rootScope) {
+        $rootScope.adminName = 'Admin'; //global variable
+        $rootScope.viewerName = '';
+    });
+
+    /*
+    * Filter to substitute admin variables within script
+    */
+    app.filter('replaceAdmin', ['$rootScope',
+      function($rootScope) {
+        return function(input) {
+          input = input || '';
+          return input.replace(/\$admin/gi, $rootScope.adminName);
+        };
+      }
+    ]);
+
+    /*
+    * Filter to substitute admin variables within script
+    */
+    app.filter('replaceViewer', ['$rootScope',
+      function($rootScope) {
+        return function(input) {
+          input = input || '';
+          return input.replace(/\$viewer/gi, $rootScope.viewerName);
+        };
+      }
+    ]);
+
     /*
     * Script controller to show script and handle keyboard navigation.
     */
-    app.controller('ScriptController', ['$http', function($http){
+    app.controller('ScriptController', ['$http', '$rootScope', function($http, $rootScope){
         this.selectedRow = 0;
-        this.admin_name = "Jawaid";
+
+        
 
         var scriptPanel = this;
         scriptPanel.allScripts = [];
@@ -19,6 +50,34 @@
             // load first starter script
             scriptPanel.loadedScripts = data[0]; //.script;    // [0] represents first script. Following index will have following scripts. 
         });
+
+        /*
+        * Sets name of admin defined as global variable in main app module
+        */
+        this.setAdminName = function(name){
+            $rootScope.adminName = name;
+        };
+
+        /*
+        * Add script at the end of loaded scripts.
+        */
+        this.appendScript = function(index){
+            scriptPanel.loadedScripts.push( scriptPanel.allScripts[index] );
+        };
+
+        /*
+        * Replace loaded scripts with the new one.
+        */
+        this.replaceScript = function(index){
+            scriptPanel.loadedScripts = scriptPanel.allScripts[index];
+        };
+
+        /*
+        * Reset loaded scripts with the first one.
+        */
+        this.resetScript = function(){
+            scriptPanel.loadedScripts = scriptPanel.allScripts[0];
+        };
 
         /*
         * Highlights the next or previous element on up/down arrow keys.
