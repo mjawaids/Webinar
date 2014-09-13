@@ -17,7 +17,7 @@
     <link href="assets/css/dashboard.css" rel="stylesheet">
   </head>
 
-  <body ng-app="WebinarAdmin">
+  <body ng-app="WebinarAdmin" ng-controller="ScriptController as script">
 
     <!-- TOP NAVIGATION -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -77,7 +77,7 @@
                 </div>
 
                 <!-- List group -->
-                <div class="list-group scroll-panel script-panel-height" ng-controller="ScriptController as script">
+                <div class="list-group scroll-panel script-panel-height">
                   <a href="#" class="list-group-item" ng-repeat="item in script.loadedScripts" focus="{{$first}}" ng-focus="script.selectedRow = $index" ng-blur="script.selectedRow=-1" ng-class="{ 'list-group-item-success':script.selectedRow === $index}" ng-keydown="script.move($event, $index)">{{item.text | replaceAdmin | replaceViewer}}</a>
                 </div>
                 <div class="panel-footer"><em>Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys to highlight the sentence to speak.</em></div>
@@ -97,9 +97,9 @@
                 <div class="panel-body">
                
                   <!-- SLIDE THUMBNAILS -->
-                  <div class="row scroll-panel slide-panel-height" ng-controller="SlideController as slideCtrl">
-                    <div class="col-md-4" ng-repeat="slide in slideCtrl.slides">
-                    <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{slide.url}}" ng-click="ViewerScreenController.changeSlide($index)" alt="Slide"></a>
+                  <div class="row scroll-panel slide-panel-height">
+                    <div class="col-md-4" ng-repeat="slide in script.slides">
+                    <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{slide.url}}" ng-click="script.changeSlide($index)" alt="Slide"></a>
                     </div>
                   </div> <!-- ./SLIDE THUMBNAILS -->
 
@@ -111,8 +111,8 @@
             <div class="col-md-6">
               <div class="panel panel-warning">
                 <div class="panel-heading"><h3 class="panel-title">What viewer sees?</h3></div>
-                <div class="panel-body" ng-controller="ViewerScreenController as viewerScreen">
-                  <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{viewerScreen.currentSlide.url}}" alt="Viewer Screen"></a>
+                <div class="panel-body">
+                  <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{script.currentSlide.url}}" alt="Viewer Screen"></a>
                 </div>
               </div>
             </div> <!-- /.VIEWER SCREEN -->

@@ -92,7 +92,7 @@
         
         
         /*
-        *
+        * Initialize script panel
         */
 
         this.selectedRow = 0;
@@ -108,6 +108,33 @@
             // load first starter script
             scriptPanel.loadedScripts = data[0]; //.script;    // [0] represents first script. Following index will have following scripts. 
         });
+
+        /*
+        * Initialize slider panel
+        */
+        var slidePanel = this;
+        slidePanel.slides = [];
+
+        $http.get('slides-thumb-urls.json').success(function(data){
+            slidePanel.slides = data;
+        });
+
+        /*
+        * Initialize viewer screen panel
+        */
+        var viewerScreenPanel = this;
+        viewerScreenPanel.slides = [];
+        viewerScreenPanel.currentSlide = null;
+
+        $http.get('slides-thumb-urls.json').success(function(data){
+            viewerScreenPanel.slides = data;
+            viewerScreenPanel.currentSlide = data[0];
+        });
+
+        // Change the current viewing slide
+        this.changeSlide = function(slideIndex){
+            viewerScreenPanel.currentSlide = viewerScreenPanel.slides[slideIndex];
+        };
 
         /*
         * Sets name of admin defined as global variable in main app module
@@ -148,37 +175,6 @@
                 if(this.selectedRow < this.loadedScripts.length-1) this.selectedRow++;
             }
             else if(event.keyCode == 9){ /* do nothing */ }    // TAB
-        };
-    }]);
-
-    /*
-    * Slides controller to show slide thumbs.
-    */
-    app.controller('SlideController', ['$http', function($http){
-        var slidePanel = this;
-        slidePanel.slides = [];
-
-        $http.get('slides-thumb-urls.json').success(function(data){
-            slidePanel.slides = data;
-        });
-    }]);
-
-    /*
-    * Viewer Screen controller to show what viewer is currently seeing.
-    */
-    app.controller('ViewerScreenController', ['$http', function($http){
-        var viewerScreenPanel = this;
-        viewerScreenPanel.slides = [];
-        viewerScreenPanel.currentSlide = null;
-
-        $http.get('slides-thumb-urls.json').success(function(data){
-            viewerScreenPanel.slides = data;
-            viewerScreenPanel.currentSlide = data[0];
-        });
-
-        // Change the current viewing slide
-        this.changeSlide = function(slideIndex){
-            viewerScreenPanel.currentSlide = viewerScreenPanel.slides[slideIndex];
         };
     }]);
 
