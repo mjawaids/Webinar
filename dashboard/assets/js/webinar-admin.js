@@ -9,6 +9,44 @@
     });
 
     /*
+    * WebSocket Service to provide communication with server
+    */
+    app.factory('WSService', function() {
+        var service = {};
+
+        service.connect = function() {
+        if(service.ws) { return; }
+
+        // NOTE: Update the URL when deployed
+        var ws = new WebSocket("ws://localhost:8080");
+
+        ws.onopen = function() {
+          console.log("Succeeded to open a connection");
+        };
+
+        ws.onerror = function() {
+          console.log("Failed to open a connection");
+        }
+
+        ws.onmessage = function(message) {
+          service.callback(message.data);
+        };
+
+        service.ws = ws;
+        }
+
+        service.send = function(message) {
+            service.ws.send(message);
+        }
+
+        service.subscribe = function(callback) {
+            service.callback = callback;
+        }
+
+        return service;
+    });
+
+    /*
     * Filter to substitute admin variables within script
     */
     app.filter('replaceAdmin', ['$rootScope',
@@ -35,15 +73,35 @@
     /*
     * Script controller to show script and handle keyboard navigation.
     */
-    app.controller('ScriptController', ['$http', '$rootScope', function($http, $rootScope){
-        this.selectedRow = 0;
-
+    app.controller('ScriptController', ['$http', '$rootScope', '$log', 'WSService', function($http, $rootScope, $log, WSService){
         
+        /*
+        * Connect to server and send receive messages
+        */
+
+        // Listen to incoming messages
+        WSService.subscribe(function(message) {
+            // TODO: parse message received and change script
+            $log.log(message);
+        });
+
+        // Connect to server
+        WSService.connect();
+        // TODO: Send message to server
+        //WSService.send(message);
+        
+        
+        /*
+        *
+        */
+
+        this.selectedRow = 0;
 
         var scriptPanel = this;
         scriptPanel.allScripts = [];
         scriptPanel.loadedScripts = [];
 
+        // Load customer script
         $http.get('customer-script.json').success(function(data){
             // load all scripts
             scriptPanel.allScripts = data;

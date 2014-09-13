@@ -33,4 +33,8 @@ $(document).ready(function(){
         console.log(e.data);
         alert(e.data);
     };
+
+    conn.onerror = function(e) {
+        console.log("Failed to open a connection");
+    };
 });

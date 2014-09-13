@@ -4,8 +4,9 @@ namespace React\Stream;
 
 use Evenement\EventEmitter;
 use React\EventLoop\LoopInterface;
+use InvalidArgumentException;
 
-class Stream extends EventEmitter implements ReadableStreamInterface, WritableStreamInterface
+class Stream extends EventEmitter implements DuplexStreamInterface
 {
     public $bufferSize = 4096;
     public $stream;
@@ -18,6 +19,12 @@ class Stream extends EventEmitter implements ReadableStreamInterface, WritableSt
     public function __construct($stream, LoopInterface $loop)
     {
         $this->stream = $stream;
+        if (!is_resource($this->stream) || get_resource_type($this->stream) !== "stream") {
+             throw new InvalidArgumentException('First parameter must be a valid stream resource');
+        }
+
+        stream_set_blocking($this->stream, 0);
+
         $this->loop = $loop;
         $this->buffer = new Buffer($this->stream, $this->loop);
 
@@ -50,7 +57,9 @@ class Stream extends EventEmitter implements ReadableStreamInterface, WritableSt
 
     public function resume()
     {
-        $this->loop->addReadStream($this->stream, array($this, 'handleData'));
+        if ($this->readable) {
+            $this->loop->addReadStream($this->stream, array($this, 'handleData'));
+        }
     }
 
     public function write($data)

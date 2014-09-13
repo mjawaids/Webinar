@@ -1,9 +1,9 @@
 <?php
-namespace WebinarApp;
+namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-class Webinar implements MessageComponentInterface {
+class Chat implements MessageComponentInterface {
     protected $clients;
 
     public function __construct() {

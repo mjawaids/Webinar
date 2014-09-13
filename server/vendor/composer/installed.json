@@ -436,52 +436,6 @@
         ]
     },
     {
-        "name": "react/stream",
-        "version": "v0.4.1",
-        "version_normalized": "0.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/reactphp/stream.git",
-            "reference": "9db28e85a6fe7b57fad5e8c036f3434bcb8c8f60"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/reactphp/stream/zipball/9db28e85a6fe7b57fad5e8c036f3434bcb8c8f60",
-            "reference": "9db28e85a6fe7b57fad5e8c036f3434bcb8c8f60",
-            "shasum": ""
-        },
-        "require": {
-            "evenement/evenement": "~2.0",
-            "php": ">=5.4.0"
-        },
-        "suggest": {
-            "react/event-loop": "0.4.*",
-            "react/promise": "~2.0"
-        },
-        "time": "2014-03-30 17:19:02",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "React\\Stream\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "Basic readable and writable stream interfaces that support piping.",
-        "keywords": [
-            "pipe",
-            "stream"
-        ]
-    },
-    {
         "name": "react/event-loop",
         "version": "v0.4.1",
         "version_normalized": "0.4.1.0",
@@ -618,6 +572,56 @@
             "WebSockets",
             "server",
             "sockets"
+        ]
+    },
+    {
+        "name": "react/stream",
+        "version": "v0.4.2",
+        "version_normalized": "0.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/reactphp/stream.git",
+            "reference": "acc7a5fec02e0aea674560e1d13c40ed0c8c5465"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/reactphp/stream/zipball/acc7a5fec02e0aea674560e1d13c40ed0c8c5465",
+            "reference": "acc7a5fec02e0aea674560e1d13c40ed0c8c5465",
+            "shasum": ""
+        },
+        "require": {
+            "evenement/evenement": "~2.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "react/event-loop": "0.4.*",
+            "react/promise": "~2.0"
+        },
+        "suggest": {
+            "react/event-loop": "0.4.*",
+            "react/promise": "~2.0"
+        },
+        "time": "2014-09-10 03:32:31",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "React\\Stream\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Basic readable and writable stream interfaces that support piping.",
+        "keywords": [
+            "pipe",
+            "stream"
         ]
     }
 ]
