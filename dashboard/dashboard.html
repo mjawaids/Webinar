@@ -1,0 +1,59 @@
+<div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row">
+    <div class="col-md-12"><h1 class="page-header">Dashboard</h1></div>
+    </div>
+          
+    <!-- SCRIPT -->
+    <div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+
+        <!-- Default panel contents -->
+        <div class="panel-heading"><!-- span class="glyphicon glyphicon-file"></span --><h3 class="panel-title">Script</h3></div>
+        <div class="panel-body">
+            <p><strong>When viewer is ready read through the script below as you commence your presentation.</strong></p>
+        </div>
+
+        <!-- List group -->
+        <div class="list-group scroll-panel script-panel-height">
+            <a href="#" class="list-group-item" ng-repeat="item in script.loadedScripts" focus="{{$first}}" ng-focus="script.selectedRow = $index" ng-blur="script.selectedRow=-1" ng-class="{ 'list-group-item-success':script.selectedRow === $index}" ng-keydown="script.move($event, $index)">{{item.text | replaceAdmin | replaceViewer}}</a>
+        </div>
+        <div class="panel-footer"><em>Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys to highlight the sentence to speak.</em></div>
+              
+        </div>
+    </div>
+    </div> <!-- /.SCRIPT -->
+
+    <div class="row">
+
+    <!-- SLIDES -->
+    <div class="col-md-6">
+        <div class="panel panel-info">
+               
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h3 class="panel-title">Slides</h3></div>
+        <div class="panel-body">
+               
+            <!-- SLIDE THUMBNAILS -->
+            <div class="row scroll-panel slide-panel-height">
+            <div class="col-md-4" ng-repeat="slide in script.slides">
+            <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{slide.url}}" ng-click="script.changeSlide($index)" alt="Slide"></a>
+            </div>
+            </div> <!-- ./SLIDE THUMBNAILS -->
+
+        </div>
+        </div>
+    </div> <!-- /.SLIDES -->
+
+    <!-- VIEWER SCREEN -->
+    <div class="col-md-6">
+        <div class="panel panel-warning">
+        <div class="panel-heading"><h3 class="panel-title">What viewer sees?</h3></div>
+        <div class="panel-body">
+            <a href="#" class="thumbnail"><img class="img-responsive" ng-src="{{script.currentSlide.url}}" alt="Viewer Screen"></a>
+        </div>
+        </div>
+    </div> <!-- /.VIEWER SCREEN -->
+
+    </div>
+</div>
