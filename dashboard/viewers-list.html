@@ -21,29 +21,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-click="var=1">
-                        <td>Jawaid</td>
-                        <td>Ibexoft</td>
-                        <td>jawaid@ibexofts.tk</td>
-                        <td>Dilkusha Forum</td>
-                        <td>Karachi</td>
-                        <td>Sind</td>
-                        <td>74600</td>
-                        <td>03323383358</td>
-                        <td>03323383358</td>
-                        <td><a href=""> <span class="glyphicon glyphicon-remove"></span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Faisal</td>
-                        <td>New Optican</td>
-                        <td>faisal@newoptican.pk</td>
-                        <td>Ayesha Manzil</td>
-                        <td>Karachi</td>
-                        <td>Sind</td>
-                        <td>74600</td>
-                        <td>0321.2522088</td>
-                        <td>0321.2522088</td>
-                        <td><a href=""> <span class="glyphicon glyphicon-remove"></span></a></td>
+                    <tr ng-repeat="viewer in script.viewers" id="{{viewer.id}}" ng-click="tab='add-viewer'">
+                        <td>{{viewer.name}}</td>
+                        <td>{{viewer.business_name}}</td>
+                        <td>{{viewer.email}}</td>
+                        <td>{{viewer.address}}</td>
+                        <td>{{viewer.city}}</td>
+                        <td>{{viewer.state}}</td>
+                        <td>{{viewer.zip}}</td>
+                        <td>{{viewer.phone}}</td>
+                        <td>{{viewer.fax}}</td>
+                        <td><a href="../api/delete-viewer/{{viewer.id}}"> <span class="glyphicon glyphicon-remove"></span></a></td>
                     </tr>
                 </tbody>
             </table>

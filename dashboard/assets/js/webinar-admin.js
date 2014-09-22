@@ -101,6 +101,16 @@
             // TODO: Send message to server
             //WSService.send(message);
 
+            /*
+            * Initialize viewers panel
+            */
+            var viewersPanel = this;
+            viewersPanel.viewers = [];
+            $http.get('../api/viewers').success(function (data) {
+                viewersPanel.viewers = data;
+            });
+
+           
 
             /*
             * Initialize script panel
